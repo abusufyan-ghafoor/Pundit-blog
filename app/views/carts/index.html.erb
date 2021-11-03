@@ -1,0 +1,61 @@
+
+<div class="container">
+  <div class="row">
+    <h5 style="color:green">One new Item has been added to your Cart</h5>
+    <div class="col-lg-7">
+      <% @totl_crt = 0 %>
+      <% @total_bill = 0 %>
+      <% @total_quantity = 0 %>
+      <% @carts.each do |cart| %>
+      <% product = Product.find_by(id: cart["product_id"]) %>
+      <div class="row" style="background-color: white;">
+        <div class="col-lg-2 d-flex align-items-center">
+          <% if product.avatars[0].nil? %>
+              <p>Image not available</p>
+          <% else %>
+              <%= image_tag product.avatars[0].url, size: '80x100' %>
+          <% end %>
+        </div>
+        <div class="col-lg-6" id="pro-des">
+          <h3><%= product.name %></h3><br>
+          <h6 style="color:orangered;">Price: $<%= product.price %>.00 only</h6><br>
+          <h6>Quantity: <span class="cart_qty" data-id = "<%=product.id%>" > <%= cart["quantity"] %></span></h6>
+          <% @total_quantity +=  cart["quantity"] %>
+          <p><% @total_bill += product.price * cart["quantity"] %></p>
+          <%= form_for :cart, url: cart_path(product.id), method: :patch, id: "update-cart", remote: true do |c| %>
+            <div class="field">
+              <%= c.number_field :addquantity, :value => cart["quantity"].to_i %>
+            </div>
+            <div class="field">
+              <%= c.hidden_field :prod_price, value: product.price %>
+            </div>
+            <div class="field">
+              <%= c.hidden_field :ttl_bill, value: @total_bill %>
+            </div>
+            <div class="actions">
+              <%= c.submit "Update Quantity" %>
+            </div>
+          <% end %>
+          <h6>Total Bill: <span class="total_bill" data-id = "<%=product.id%>"><%= product.price * cart["quantity"]%></span></h6>
+        </div>
+        <div class="col-lg-4 d-flex align-items-center">
+          <button type="button" class="btn btn-info">Update Qty</button>
+          <%= link_to 'Delete', cart_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+        </div>
+      </div><br>
+      <%  @totl_crt += 1%>
+      <% end -%>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-4" style="background-color: white;">
+      <h5> My Shopping Cart (<%= @totl_crt %> Items)</h5>
+      <br>
+      <h5>Total: <span style="color: orangered;" id="upd_bill">Rs. <%= @total_bill %>.00</span></h5>
+      <%= link_to 'CHEACKOUT', orders_path(item: @total_quantity, bill: @total_bill), :method => "post", class: "btn btn-primary btn-lg buynow" %>
+      <%= link_to 'Shop More', root_path,  class: "btn btn-secondary btn-lg addcart" %>
+    </div>
+    <br>
+  </div>
+</div>
+
+

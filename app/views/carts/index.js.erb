@@ -1,0 +1,7 @@
+
+$('.cart_qty[data-id="<%= @product_id %>"]').html("<%= @order_quantity %>");
+$('.total_bill[data-id="<%= @product_id %>"]').html('<%= @order_quantity * @prd_price %>')
+$('#upd_bill').html('<%= @updtd_bill + (@updated_qty * @prd_price) %>')
+
+//  $('#qty').html("<%= @ord_qty %>");  
+

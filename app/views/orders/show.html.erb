@@ -1,0 +1,120 @@
+<% if user_signed_in? %>
+  <h3>Hye! you are on index page.</h3>
+  <div class="container">
+    <div class="two-column no-gutters">
+      <div class="row no-gutters">
+        <div class="left-column col-7 col-lg-8">
+          <div class="row">
+            <div class="col-lg-12 ordr-detail" style="background-color: white;">
+            <% @totl_crt = 0 %>
+            <% @total_bill = 0 %>
+            <% @total_quantity = 0 %>
+            <% @orderdetails.each do |orderdetail| %>
+            <% product = Product.find_by(id: orderdetail.product_id)%>
+            <div class="row" style="background-color: white;">
+              <div class="col-lg-2 d-flex align-items-center">
+                <% if product.avatars[0].nil? %>
+                    <p>Image not available</p>
+                <% else %>
+                    <%= image_tag product.avatars[0].url, size: '80x100' %>
+                <% end %>
+              </div>
+              <div class="col-lg-6" id="pro-des">
+                <h3><%= product.name %></h3><br>
+                <h6 style="color:orangered;">Price: $<%= product.price %>.00 only</h6><br>
+                <h6>Quantity: <span class="cart_qty" data-id = "<%=product.id%>" > <%= orderdetail.quantity %></span></h6>
+                <% @total_quantity +=  orderdetail.quantity %>
+                <p><% @total_bill += product.price * orderdetail.quantity %></p> 
+                <h6>Total Bill: <span class="total_bill" data-id = "<%=product.id%>"><%= product.price * orderdetail.quantity %></span></h6>
+              </div>
+              <div class="col-lg-4 d-flex align-items-center">
+                <button type="button" class="btn btn-info">Update Qty</button>
+                <%= link_to 'Delete', order_details_path(orderdetail), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
+              </div>
+            </div><hr>
+            <%  @totl_crt += 1%>
+            <% end -%>
+            </div>
+
+          </div><br>
+          <div class="row">
+            <div class="col-lg-12" style="background-color: lightpink;">
+              <%= form_for :shipping, html: {class: "add-form"} do |f| %>
+
+                  <div class="field">
+                    <%= f.label :country %>
+                    <%= f.select :country, ["Pakistan", "China", "America", "Russia", "UK"] %>
+                  </div>
+                  <div class="field">
+                    <%= f.label :first_Name %>
+                    <%= f.text_field :first_name, required: true %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :last_Name %>
+                    <%= f.text_field :last_name, required: true %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :Street_Address1 %>
+                    <%= f.text_field :Street_Address1, required: true %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :Street_Address2 %>
+                    <%= f.text_field :Street_Address2, required: true %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :city %>
+                    <%= f.text_field :city, required: true %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :province %>
+                    <%= f.select :province, ["Punjab", "KPK", "Baluchistan", "Sindh", "Gilgit Baltistan"] %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :code %>
+                    <%= f.select :code, ["PK +92", "China +86", "USA +1", "RSS +7", "UK +2"] %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :phone %>
+                    <%= f.text_field :phone, required: true %>
+                  </div>
+
+              <%end%>
+            </div>
+          </div> <br>
+          <div class="row">
+            <div class="col-lg-12" style="background-color: lightcyan;">
+              <div class=".payment-errors"></div>
+               
+              <p>hvtcjhgvnbnmhtfxugfcnvbhgcrtxgfmgnbnbgfsgrzhdgfxgnnnbvgcsrzhdtxfhgcv </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-column col-5 col-lg-4">
+          <h5> Items: <%= @order.item %></h5>
+          <h5> Shipping Fee:</h5>
+          <h4 style="font-weight: bold;">Total Bill:<%=  @order.bill%> </h4>
+          <%= form_tag checkout_create_path, method: 'post', remote: true do %>
+            <div class="field">
+              <%= hidden_field_tag :cheeck, @order.id %>
+            </div>
+            <div class="actions addcart">
+              <%= submit_tag "Pay Now" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  <% user_session_path %>
+<% end -%>
+
+

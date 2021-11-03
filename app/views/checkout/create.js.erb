@@ -1,0 +1,8 @@
+
+var stripe = Stripe('pk_test_51Jl9aAAksKRBwugxsJuepFBvx0YL4VcEQnfdaswDjndHQn9JiIeQcnkzDLmLjsQ3RiMY4NOEYGdB9XDWzO5jQLwA00lqDCdcyQ');
+
+  stripe.redirectToCheckout({
+    sessionId: '<%= @session.id %>'
+  }).then(function (result) {
+    console.log(result.error.message);
+});
