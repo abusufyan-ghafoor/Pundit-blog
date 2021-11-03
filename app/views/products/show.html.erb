@@ -1,0 +1,87 @@
+<div class="container prod">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card" style="width: 37rem;">
+        <div class="card-header">
+          <h3><%= @product.name %></h3>
+        </div>
+        <div class="bg-dark">
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="d-flex justify-content-center">
+                <% @product.avatars.each_with_index do |avatar, index| %>     
+                  <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
+                    <%= image_tag(avatar.url, size: '280x430') %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5>Description:</h5><br>
+          <%= @product.description %>
+        </div>
+      </div>  
+    </div>
+    <div class="col-lg-4">
+      <div class="card" style="width: 19rem;">
+        <div class="card-header">
+          <h2>Product Details</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><p>Price: $<%= @product.price %>.00 only</p></li>
+          <li class="list-group-item"> 
+            <%= form_for :cart, url: carts_path do |c| %>
+              <div class="field">
+                <%= c.label :Quantity_Maximum %>
+                <%= c.number_field :addquantity, {min: 1, max: @product.quantity} %>
+              </div>
+              <div class="field">
+                <%= c.hidden_field :product, value: @product.id %>
+              </div>
+              <div class="actions addcart">
+                <%= c.submit "Add To Cart" %>
+              </div>
+            <% end %>
+          </li>
+          <li class="list-group-item ">
+            <%= link_to 'Add To Cart', cart_path(@product),  class: "btn btn-secondary btn-lg addcart" %>
+          </li>
+          <li class="list-group-item">Reviews: </li>
+          <li class="list-group-item">
+            <h4>Add a comment:</h4>
+            <%= render 'reviews/form' %>
+            <%= render 'comments/form' %>
+          </li>
+        </ul>
+      </div>
+      <div class="card border-success mb-3" style="max-width: 18rem;">
+        <div class="card-header bg-transparent border-success">Comments</div>
+        <div><%= render @product.reviews %></div>
+        <div class="card-body text-success">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= render 'comments/comment' %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if policy(@product).prod? %>
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+    <%= link_to 'Your Products', products_path %> | 
+  <% end %>
+  <%= link_to 'All Products', root_path %>
+
+</div>
+
+
+

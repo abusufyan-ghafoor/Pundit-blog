@@ -1,0 +1,13 @@
+// Place all the styles related to the OrderDetails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.two-column .left-column {
+    padding-right: 2rem !important;
+}
+.right-column {
+	background-color: white;
+	height: 250px !important;
+}
+.add-form {
+	margin: 25px 25px;
+}

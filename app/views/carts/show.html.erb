@@ -1,0 +1,37 @@
+<% if user_signed_in? %>
+	<div class="container">
+	  	<div class="row">
+	  		<h5 style="color:green">One new Item has been added to your Cart</h5>
+	  		<hr>
+	  		<div class="col-lg-8">
+	  			<div class="row">
+	  				<div class="col-lg-3">
+	  					<% if @product.avatars[0].nil? %>
+	  					    <p>Image not available</p>
+	  					<% else %>
+	  					    <%= image_tag @product.avatars[0].url, size: '150x180' %>
+	  					<% end %>
+	  				</div>
+	  				<div class="col-lg-9">
+	  					<h3><%= @product.name %></h3><br>
+	  					<h6 style="color:orangered;">Price: $<%= @product.price %>.00 only</h6><br>
+	  					<h6>Quantity: </h6>
+	  				</div>
+	  			</div>
+	  		</div>
+	  		<div class="col-lg-4" style=" border-left: 6px solid green; height: auto;">
+	  			<h5> My Shopping Cart (3 Items)</h5>
+	  			<br>
+	  			<h5>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: orangered;">Rs. 333.00</span></h5>
+	  			<%= link_to 'Go To Cart', carts_path,  class: "btn btn-primary btn-lg buynow" %>
+	  			<%= link_to 'Shop More', root_path,  class: "btn btn-secondary btn-lg addcart" %>
+	  		</div>
+	  		<br>
+	  		<hr>
+	  	</div>
+	</div>
+  <% else %>
+  <% user_session_path %>
+<% end -%>
+
+<%= link_to 'Delete', cart["product_id"], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>

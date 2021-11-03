@@ -1,0 +1,11 @@
+<p>You successfully done the order.</p>
+<% @all_orders.each do |ord| %>
+  <% if ord.order_status == true %>
+    <p>paid items</p>
+    <p> <%= ord.bill %></p>
+  <% else %>
+    <p>unpaid</p>
+    <p><%= ord.bill %></p>
+  <% end %>
+
+<% end %>

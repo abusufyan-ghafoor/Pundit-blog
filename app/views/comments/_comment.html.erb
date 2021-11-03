@@ -1,0 +1,5 @@
+<div class="comments_section">
+    <% @product.comments.order(created_at: :desc).each do |comment|%>
+      <p><span style="font-weight: bold;"><%= comment.user.name %> :</span><%= comment.description %></p>
+    <% end %>
+  </div>

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#"><%= link_to 'A-one Shopping', root_path, class: 'navbar-brand' %> </a>
+    
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;margin-left: auto;">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to 'Product', new_product_path %>
+          </li> &nbsp; &nbsp; &nbsp;
+          <li class="nav-item">
+            <%= link_to 'Category', new_category_path %>
+          </li> &nbsp;&nbsp;&nbsp;
+          <li class="nav-item">
+            <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Log In', new_user_session_path %>
+          </li>&nbsp;&nbsp;&nbsp;
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path %>
+          </li>&nbsp;&nbsp;&nbsp;
+        <% end %>  
+      </ul>
+    </div>
+  </div>
+</nav>
