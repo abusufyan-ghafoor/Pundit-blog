@@ -29,5 +29,6 @@ module PunditBlog
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.action_cable.mount_path = '/cable'
+    config.assets.initialize_on_precompile = false
   end
 end
