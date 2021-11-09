@@ -1,8 +1,8 @@
 <div class="container prod">
   <div class="row">
     <div class="col-lg-8">
-      <div class="card" style="width: 37rem;">
-        <div class="card-header">
+      <div class="card" style="width: 37rem; border-style: solid; border-width: 1px; border-color: blue;">
+        <div class="card-header" style="border-style: solid; border-width: 1px; border-color: blue; text-align: center; color: black;">
           <h3><%= @product.name %></h3>
         </div>
         <div class="bg-dark">
@@ -29,12 +29,14 @@
         <div class="card-body">
           <h5>Description:</h5><br>
           <%= @product.description %>
-        </div>
+        </div> 
+        <div class="average-review-rating" data-score = "<%= @product.comments.average(:rating) %>">
+        </div> <br>
       </div>  
     </div>
     <div class="col-lg-4">
-      <div class="card" style="width: 19rem;">
-        <div class="card-header">
+      <div class="card" style="width: 19rem; border-style: solid; border-width: 1px; border-color: blue;">
+        <div class="card-header" style="text-align: center; color: black;">
           <h2>Product Details</h2>
         </div>
         <ul class="list-group list-group-flush">
@@ -43,30 +45,24 @@
             <%= form_for :cart, url: carts_path do |c| %>
               <div class="field">
                 <%= c.label :Quantity_Maximum %>
-                <%= c.number_field :addquantity, {min: 1, max: @product.quantity} %>
+                <%= c.number_field :addquantity, {min: 1, max: @product.quantity}%>
               </div>
               <div class="field">
                 <%= c.hidden_field :product, value: @product.id %>
               </div>
-              <div class="actions addcart">
-                <%= c.submit "Add To Cart" %>
+              <div class="actions">
+                <%= c.submit "Add To Cart",  style: 'color:white;', class: "btn btn-info" %>
               </div>
             <% end %>
           </li>
-          <li class="list-group-item ">
-            <%= link_to 'Add To Cart', cart_path(@product),  class: "btn btn-secondary btn-lg addcart" %>
-          </li>
-          <li class="list-group-item">Reviews: </li>
           <li class="list-group-item">
             <h4>Add a comment:</h4>
-            <%= render 'reviews/form' %>
             <%= render 'comments/form' %>
           </li>
         </ul>
       </div>
       <div class="card border-success mb-3" style="max-width: 18rem;">
         <div class="card-header bg-transparent border-success">Comments</div>
-        <div><%= render @product.reviews %></div>
         <div class="card-body text-success">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><%= render 'comments/comment' %></li>
@@ -76,12 +72,20 @@
     </div>
   </div>
   <% if policy(@product).prod? %>
-    <%= link_to 'Edit', edit_product_path(@product) %> |
-    <%= link_to 'Your Products', products_path %> | 
+    <%= link_to 'Edit', edit_product_path(@product), style: 'color:white;', class: "btn btn-info" %> &nbsp;&nbsp;&nbsp;
+    <%= link_to 'Your Products', products_path, style: 'color:white;', class: "btn btn-info" %> &nbsp;&nbsp;&nbsp;
   <% end %>
-  <%= link_to 'All Products', root_path %>
+  <%= link_to 'All Products', root_path, style: 'color:white;', class: "btn btn-info" %>
 
 </div>
 
-
+<script>
+    $('.average-review-rating').raty({
+      readOnly: true,
+      score: function() {
+      return $(this).attr('data-score');
+      },
+      path: '/assets/'
+    });
+  </script>
 

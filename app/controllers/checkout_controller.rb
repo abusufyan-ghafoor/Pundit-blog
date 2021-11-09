@@ -22,10 +22,11 @@ class CheckoutController < ApplicationController
         payment_method_types: ['card'],
         line_items: arr1,
         mode: 'payment',
-        success_url: orders_url(id: @order.id),
+        success_url: edit_order_url(id: @order.id),
         cancel_url: root_url
       })
-
+      puts "******************************************"
+      puts session.inspect
       redirect_to session.url
   end
 end
