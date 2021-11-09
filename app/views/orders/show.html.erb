@@ -1,11 +1,11 @@
 <% if user_signed_in? %>
-  <h3>Hye! you are on index page.</h3>
   <div class="container">
+    <h3 style="color: green;"> All Your current orders. </h3>
     <div class="two-column no-gutters">
       <div class="row no-gutters">
         <div class="left-column col-7 col-lg-8">
           <div class="row">
-            <div class="col-lg-12 ordr-detail" style="background-color: white;">
+            <div class="col-lg-12 ordr-detail" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
             <% @totl_crt = 0 %>
             <% @total_bill = 0 %>
             <% @total_quantity = 0 %>
@@ -29,7 +29,6 @@
               </div>
               <div class="col-lg-4 d-flex align-items-center">
                 <button type="button" class="btn btn-info">Update Qty</button>
-                <%= link_to 'Delete', order_details_path(orderdetail), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger" %>
               </div>
             </div><hr>
             <%  @totl_crt += 1%>
@@ -38,69 +37,65 @@
 
           </div><br>
           <div class="row">
-            <div class="col-lg-12" style="background-color: lightpink;">
+            <div class="col-lg-12" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
               <%= form_for :shipping, html: {class: "add-form"} do |f| %>
 
                   <div class="field">
-                    <%= f.label :country %>
-                    <%= f.select :country, ["Pakistan", "China", "America", "Russia", "UK"] %>
+                    <%= f.label :country, class: "form-label"%>
+                    <%= f.select :country, ["Pakistan", "China", "America", "Russia", "UK"], class: "form-select form-select-lg mb-3" %>
                   </div>
                   <div class="field">
-                    <%= f.label :first_Name %>
-                    <%= f.text_field :first_name, required: true %>
-                  </div>
-
-                  <div class="field">
-                    <%= f.label :last_Name %>
-                    <%= f.text_field :last_name, required: true %>
+                    <%= f.label :first_Name, class: "form-label" %>
+                    <%= f.text_field :first_name, required: true, class: "form-control"%>
                   </div>
 
                   <div class="field">
-                    <%= f.label :Street_Address1 %>
-                    <%= f.text_field :Street_Address1, required: true %>
+                    <%= f.label :last_Name, class: "form-label" %>
+                    <%= f.text_field :last_name, required: true, class: "form-control" %>
                   </div>
 
                   <div class="field">
-                    <%= f.label :Street_Address2 %>
-                    <%= f.text_field :Street_Address2, required: true %>
+                    <%= f.label :Street_Address1, class: "form-label" %>
+                    <%= f.text_field :Street_Address1, required: true, class: "form-control" %>
                   </div>
 
                   <div class="field">
-                    <%= f.label :city %>
-                    <%= f.text_field :city, required: true %>
+                    <%= f.label :Street_Address2, class: "form-label" %>
+                    <%= f.text_field :Street_Address2, required: true, class: "form-control" %>
                   </div>
 
                   <div class="field">
-                    <%= f.label :province %>
-                    <%= f.select :province, ["Punjab", "KPK", "Baluchistan", "Sindh", "Gilgit Baltistan"] %>
+                    <%= f.label :city, class: "form-label" %>
+                    <%= f.text_field :city, required: true, class: "form-control" %>
                   </div>
 
                   <div class="field">
-                    <%= f.label :code %>
-                    <%= f.select :code, ["PK +92", "China +86", "USA +1", "RSS +7", "UK +2"] %>
+                    <%= f.label :province, class: "form-label" %>
+                    <%= f.select :province, ["Punjab", "KPK", "Baluchistan", "Sindh", "Gilgit Baltistan"], class: "form-select" %>
                   </div>
 
                   <div class="field">
-                    <%= f.label :phone %>
-                    <%= f.text_field :phone, required: true %>
+                    <%= f.label :code, class: "form-label" %>
+                    <%= f.select :code, ["PK +92", "China +86", "USA +1", "RSS +7", "UK +2"], class: "form-select" %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :phone, class: "form-label" %>
+                    <%= f.text_field :phone, required: true, class: "form-control" %>
                   </div>
 
               <%end%>
             </div>
           </div> <br>
-          <div class="row">
-            <div class="col-lg-12" style="background-color: lightcyan;">
-              <div class=".payment-errors"></div>
-               
-              <p>hvtcjhgvnbnmhtfxugfcnvbhgcrtxgfmgnbnbgfsgrzhdgfxgnnnbvgcsrzhdtxfhgcv </p>
-            </div>
-          </div>
         </div>
 
-        <div class="right-column col-5 col-lg-4">
-          <h5> Items: <%= @order.item %></h5>
-          <h5> Shipping Fee:</h5>
-          <h4 style="font-weight: bold;">Total Bill:<%=  @order.bill%> </h4>
+        <div class="right-column col-5 col-lg-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"><br>
+          <h5> Total order Items: &nbsp; &nbsp; <span style="color: orangered;"><%= @order.item %></span></h5>
+
+          <h5> Shipping Fee: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <span style="color: orangered;">US $10.00</span> </h5>
+
+          <h4 style="font-weight: bold;">Total Bill: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: orangered;">US $<%=  @order.bill%>.00</span> </h4>
+          <br>
           <%= form_tag checkout_create_path, method: 'post', remote: true do %>
             <div class="field">
               <%= hidden_field_tag :cheeck, @order.id %>

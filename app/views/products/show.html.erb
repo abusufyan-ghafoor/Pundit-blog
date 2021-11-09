@@ -3,7 +3,7 @@
     <div class="col-lg-8">
       <div class="card" style="width: 37rem; border-style: solid; border-width: 1px; border-color: blue;">
         <div class="card-header" style="border-style: solid; border-width: 1px; border-color: blue; text-align: center; color: black;">
-          <h3><%= @product.name %></h3>
+          <h2 style="color: orangered; font-family: sans-serif; font-weight: bold;"><%= @product.name %></h2>
         </div>
         <div class="bg-dark">
           <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -27,8 +27,8 @@
           </div>
         </div>
         <div class="card-body">
-          <h5>Description:</h5><br>
-          <%= @product.description %>
+          <h3 style="color: orangered;">Description:</h3>
+          <h5><%= @product.description %></h5>
         </div> 
         <div class="average-review-rating" data-score = "<%= @product.comments.average(:rating) %>">
         </div> <br>
@@ -40,11 +40,11 @@
           <h2>Product Details</h2>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><p>Price: $<%= @product.price %>.00 only</p></li>
+          <li class="list-group-item"><h5 style="font-weight: bold;">Price: US $<%= @product.price %>.00 only</h5></li>
           <li class="list-group-item"> 
             <%= form_for :cart, url: carts_path do |c| %>
               <div class="field">
-                <%= c.label :Quantity_Maximum %>
+                <%= c.label :Quantity_Maximum, style: "font-weight: bold;" %>
                 <%= c.number_field :addquantity, {min: 1, max: @product.quantity}%>
               </div>
               <div class="field">

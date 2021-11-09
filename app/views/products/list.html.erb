@@ -14,9 +14,9 @@
               <%= image_tag product.avatars[0].url, size: '250x280' %>
             <% end %>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Stock: <%= product.quantity %></li>
-              <li class="list-group-item">Price:<%= product.price %></li>
-              <li class="list-group-item">Category: <%= link_to Category.find(product.category_id).name %></li>
+              <li class="list-group-item"><h5>Stock: <%= product.quantity %></h5></li>
+              <li class="list-group-item"><h5>Price: <strong><%= product.price %>.00 $</strong></h5></li>
+              <li class="list-group-item"><h5>Category: <%= Category.find(product.category_id).name%></h5></li>
               <li class="list-group-item">
                 <div class="average-review-rating" data-score = "<%= product.comments.average(:rating) %>">
                 </div>

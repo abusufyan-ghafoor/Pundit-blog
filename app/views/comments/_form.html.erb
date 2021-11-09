@@ -1,9 +1,8 @@
 <% if user_signed_in? %>
   <%= form_with(model: [ @product, @comment ]) do |form| %>
     <div id="rating-form">
-      <label> Rating </label>
-<!--       <%= form.select :rating, [[1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"]] %>
- -->    </div>
+      <label> <h5>Rating </h5> </label>
+    </div>
     <div class="field">
       <%= form.text_area :description, class: "form-control" %>
     </div>
