@@ -2,9 +2,6 @@ class OrdersController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@order = Order.find_by(id: params[:id])
-		@order.order_status = true
-		@order.save
 		@all_orders = current_user.orders.all
 	end
 
@@ -30,8 +27,11 @@ class OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 		@orderdetails = @order.order_details.all
 	end
-	def update
-		
+	def edit
+		@order = Order.find_by(id: params[:id])
+		@order.order_status = true
+		@order.save
+		redirect_to orders_path
 	end
 	def destroy
 		@order = Order.find(params[:id])

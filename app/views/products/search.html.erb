@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <% @results.each do |product| %>
+      <div class="col-lg-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            <h5><%= product.name %></h5>
+          </div>
+          <div class="card-body">
+            <% if product.avatars[0].nil? %>
+              <p>Image not available</p>
+            <% else %>
+              <%= image_tag product.avatars[0].url, size: '250x280' %>
+            <% end %>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Stock: <%= product.quantity %></li>
+              <li class="list-group-item">Price:<%= product.price %></li>
+              <li class="list-group-item">Category: <%= link_to Category.find(product.category_id).name %></li>
+              <li class="list-group-item">
+                <div class="average-review-rating" data-score = "<%= product.comments.average(:rating) %>">
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <%= link_to 'Show', product, style: 'color:white;', class: "btn btn-danger" %>
+          </div>
+        </div>
+        <br>
+      </div>
+      
+    <% end %>
+  </div>
+</div>
+<script>
+  $('.average-review-rating').raty({
+    readOnly: true,
+    score: function() {
+    return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

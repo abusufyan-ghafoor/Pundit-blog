@@ -24,9 +24,9 @@
             <%= image_tag product.avatars[0].url, size: '50x30' %>
           <% end %>
       </td>
-      <td><%= link_to 'Show', product %></td>
-      <td><%= link_to 'Edit', edit_product_path(product) %></td>
-      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Show', product, style: 'color:white;', class: "btn btn-info" %></td>
+      <td><%= link_to 'Edit', edit_product_path(product), style: 'color:white;', class: "btn btn-info" %></td>
+      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, style: 'color:white;', class: "btn btn-info" %></td>
     </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
  
 <br>
  
-<%= link_to 'New product', new_product_path %>
+<%= link_to 'New product', new_product_path, style: 'color:white;', class: "btn btn-info" %>

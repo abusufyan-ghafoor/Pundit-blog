@@ -1,30 +1,42 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#"><%= link_to 'A-one Shopping', root_path, class: 'navbar-brand' %> </a>
+    <a class="navbar-brand" href="#"><%= link_to image_tag("logos/online.png", size: '70x70', alt: "logo"), root_path, class: 'navbar-brand' %> </a>
     
     <div class="collapse navbar-collapse" id="navbarScroll">
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div class="d-flex">
+        <%= form_tag(search_path, :method => "get") do %>
+          <div class="input-group">
+            <%= search_field_tag :search, params[:search], placeholder: "Search Products....", class: "form-control me-2"%>
+            <div class="input-group-btn">
+              <%= button_tag "Search", class: "btn btn-outline-success" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll " style="--bs-scroll-height: 100px;margin-left: auto;">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Product', new_product_path %>
+            <%= link_to 'Product', new_product_path, style: 'color:white;', class: "btn btn-secondary" %>
           </li> &nbsp; &nbsp; &nbsp;
           <li class="nav-item">
-            <%= link_to 'Category', new_category_path %>
+            <%= link_to 'Category', new_category_path, style: 'color:white;', class: "btn btn-secondary" %>
           </li> &nbsp;&nbsp;&nbsp;
           <li class="nav-item">
-            <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-          </li>
+            <%= link_to 'Log out', destroy_user_session_path, style: 'color:white;', method: :delete, class: "btn btn-secondary" %>
+          </li> &nbsp; &nbsp; &nbsp;
+          <li class="nav-item">
+            <%= link_to 'Contact Us', about_index_path, style: 'color:white;', class: "btn btn-secondary" %>
+          </li> 
         <% else %>
           <li class="nav-item">
-            <%= link_to 'Log In', new_user_session_path %>
+            <%= link_to 'Log In', new_user_session_path, style: 'color:white;', class: "btn btn-secondary" %>
           </li>&nbsp;&nbsp;&nbsp;
           <li class="nav-item">
-            <%= link_to 'Sign Up', new_user_registration_path %>
+            <%= link_to 'Sign Up', new_user_registration_path, style: 'color:white;', class: "btn btn-secondary" %>
           </li>&nbsp;&nbsp;&nbsp;
+          <li class="nav-item">
+            <%= link_to 'Contact Us', about_index_path, style: 'color:white;', class: "btn btn-secondary" %>
+          </li> 
         <% end %>  
       </ul>
     </div>

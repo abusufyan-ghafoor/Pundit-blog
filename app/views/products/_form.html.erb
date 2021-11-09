@@ -11,35 +11,35 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
  
  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_area :description, class: "form-control", rows: "3" %>
   </div>
  
   <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
+    <%= f.label :price, class: "form-label" %>
+    <%= f.text_field :price, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= select_tag "product[category_id]", options_from_collection_for_select(Category.all, "id", "name"), prompt: "Select Category" %>
+    <%= select_tag "product[category_id]", options_from_collection_for_select(Category.all, "id", "name"), prompt: "Select Category", class: "form-select form-select-lg mb-3" %>
   </div>
 
   <div class="field">
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
+    <%= f.label :quantity, class: "form-label" %>
+    <%= f.text_field :quantity, class: "form-control" %>
   </div>
   
   <div class="field">
-    <%= f.label :avatars %>
-    <%= f.file_field :avatars, multiple: true %>
+    <%= f.label :avatars, class: "form-label"%>
+    <%= f.file_field :avatars, multiple: true, class: "form-control form-control-lg" %>
   </div>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", style: 'color:white;', class: "btn btn-info btn-lg" %>
   </div>
 <% end %>

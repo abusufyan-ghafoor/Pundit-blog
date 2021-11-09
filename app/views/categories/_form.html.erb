@@ -12,16 +12,16 @@
   <% end %>
   
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.label :description, class: "form-label" %>
+    <%= f.text_field :description, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add Category", style: 'color:white;', class: "btn btn-info btn-lg" %>
   </div>
 <% end %>

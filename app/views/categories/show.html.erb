@@ -11,9 +11,9 @@
 </p>
 
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', new_product_path %>
+<%= link_to 'Edit', edit_category_path(@category), style: 'color:white;', class: "btn btn-info" %> |
+<%= link_to 'Back', new_product_path, style: 'color:white;', class: "btn btn-info" %>
 
 <% if policy(@category).categ? %>
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Back', categories_path, style: 'color:white;', class: "btn btn-info" %>
 <% end %>
