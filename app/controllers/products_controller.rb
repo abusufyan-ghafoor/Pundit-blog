@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 	
   def list
-    @products = Product.all
+    @products = Product.page(params[:page])
   end
 
   def index
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
 	def show
 	  @product = Product.find(params[:id])
     @comment = Comment.new(product_id: @product.id)
+    
 	end
 
 	def new
@@ -52,6 +53,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy 
     redirect_to products_path
+  end
+
+  def search
+    if params[:search].blank?
+      redirect_to root_path
+    else
+      @parameter = params[:search].downcase
+      @results = Product.all.where("lower(name) LIKE :search", search: "%#{@parameter}%")
+    end
   end
 
 

@@ -6,6 +6,12 @@ body {
   font-size: 13px;
   line-height: 18px;
 }
+.footer {
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  position: relative !important;
+}
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -24,11 +30,6 @@ a {
 
   &:visited {
     color: #666;
-  }
-
-  &:hover {
-    color: #fff;
-    background-color: #000;
   }
 }
 

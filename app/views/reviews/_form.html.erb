@@ -1,1 +1,22 @@
- 
+<% if user_signed_in? %>
+  <%= form_with model: @product do |form| %>
+    <%= form.fields_for :review do |review_form| %>
+	    <div id="rating-form">
+	    	<%= review_form.label :rating %>
+	    </div>
+	    <div class="field">
+	    	<%= review_form.label :comment %>
+	    	<%= review_form.text_field :comment%>
+	    </div>
+	    <div class="actions">
+	    	<%= review_form.submit %>
+	    </div>
+	  <% end %>    
+  <% end %>
+<% end %>
+<script>
+	$(‘#rating-form’).raty({
+	path: ‘/assets/’,
+	scoreName: ‘review[rating]’
+	});
+</script>

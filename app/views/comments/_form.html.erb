@@ -1,11 +1,24 @@
 <% if user_signed_in? %>
   <%= form_with(model: [ @product, @comment ]) do |form| %>
-    <p>
-      <%= form.text_area :description %>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
+    <div id="rating-form">
+      <label> Rating </label>
+<!--       <%= form.select :rating, [[1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"]] %>
+ -->    </div>
+    <div class="field">
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+    <div class="field">
+      <%= form.submit "Create Review", style: 'color:white;', class: "btn btn-info" %>
+    </div>
 
   <% end %>
-<% end %>  
+<% end %>
+<script>
+  $('#rating-form').raty({
+  size: 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  scoreName: 'comment[rating]'
+  });
+</script>

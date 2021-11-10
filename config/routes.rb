@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'about/index'
   get 'checkout/create'
   # devise_for :users, :controllers => { :registrations => 'users/registrations' }
   devise_for :users, :controllers => {:registrations => "users/registrations"}
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   resources :categories
   #resources :checkout
   post "checkout/create", to: "checkout#create"
-  resources :orders  
+  get "/search", to: "products#search"
+  resources :orders
+  resources :about 
   
 end

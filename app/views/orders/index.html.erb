@@ -1,11 +1,35 @@
 <p>You successfully done the order.</p>
-<% @all_orders.each do |ord| %>
-  <% if ord.order_status == true %>
-    <p>paid items</p>
-    <p> <%= ord.bill %></p>
-  <% else %>
-    <p>unpaid</p>
-    <p><%= ord.bill %></p>
-  <% end %>
 
-<% end %>
+<div class="abc">
+  <div class="container ord-table">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">order Id</th>
+          <th scope="col">Total Items</th>
+          <th scope="col">Total Bill </th>
+          <th scope="col">Status </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @all_orders.each do |ord| %>
+          <tr>
+            <th scope="row"><%= ord.id %></th>
+            <td><%= ord.item %></td>
+            <td><%= ord.bill %></td>
+            <td>
+              <% if ord.order_status == true %>
+                <p>Paid</p>
+              <% else %>
+                <p>Unpaid</p>
+              <% end %>
+            </td>
+            <td><%= link_to 'Destroy', ord, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

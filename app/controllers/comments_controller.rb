@@ -1,9 +1,14 @@
 class CommentsController < ApplicationController
 	def index
-		@comments = Comment.all
+		@comments = Comment.page(params[:page]).per(3)
 	end
 	def show
 		@comment = Comment.find(params[:id])
+		if @comments.blank?
+		      @avg_review = 0
+		    else
+		      @avg_review = @comments.average(:rating)
+		end
 	end
 	def new
 		@comment = Comment.new
@@ -44,6 +49,6 @@ class CommentsController < ApplicationController
 
 	private
     def comment_params
-      params.require(:comment).permit(:description)
+      params.require(:comment).permit(:rating, :description)
     end
 end

@@ -5,22 +5,22 @@
   
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, required: true %>
+    <%= f.text_field :name, autofocus: true, required: true, class: "form-control" %>
   </div>
   
   <div class="field">
     <%= f.label :phone %><br />
-    <%= f.text_field :phone, autofocus: true, placeholder: 'xxxx-xxxxxxx', required: true %>
+    <%= f.text_field :phone, autofocus: true, placeholder: 'xxxx-xxxxxxx', required: true, class: "form-control"%>
   </div>
 
   <div class="field">
     <%= f.label :user_type %><br />
-    <%= f.select :user_type, ['moderator', 'buyer']%>
+    <%= f.select :user_type, ['moderator', 'buyer'], class: "form-select" %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: "form-control" %>
   </div>
 
   <div class="field">
@@ -28,16 +28,16 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", required: true %>
+    <%= f.password_field :password, autocomplete: "new-password", required: true, class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", style: 'color:white;', class: "btn btn-info" %>
   </div>
 <% end %>
 
