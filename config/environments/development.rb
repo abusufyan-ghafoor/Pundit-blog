@@ -5,7 +5,6 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-  config.active_storage.service = :local
   # Do not eager load code on boot.
   config.eager_load = false
   
@@ -41,6 +40,8 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.active_storage.service = :local
+
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true

@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <%= form_with(model: [ @product, @comment ]) do |form| %>
-    <div id="rating-form">
+    <div id="rateYo" data-star="<%= @comment.rating %>">
       <label> <h5>Rating </h5> </label>
     </div>
     <div class="field">
@@ -9,15 +9,24 @@
     <div class="field">
       <%= form.submit "Create Review", style: 'color:white;', class: "btn btn-info" %>
     </div>
+    <div class="field">
+      <%= form.hidden_field :rating, value: @comment.rating, id: "comment_rating" %>
+    </div>
 
   <% end %>
 <% end %>
 <script>
-  $('#rating-form').raty({
-  size: 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  scoreName: 'comment[rating]'
+  $(function(){
+     $rateyo = $('#rateYo').rateYo({
+       rating: <%= @comment.rating || 0 %>,
+       spacing: "10px",
+       normalFill: 'black',
+       ratedFill: 'orange'
+     });
+
+     $rateyo.click(function(){
+       var rating = $rateyo.rateYo("rating")
+       document.getElementById("comment_rating").value = rating
+     });
   });
 </script>

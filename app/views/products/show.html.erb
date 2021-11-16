@@ -29,8 +29,9 @@
         <div class="card-body">
           <h3 style="color: orangered;">Description:</h3>
           <h5><%= @product.description %></h5>
-        </div> 
-        <div class="average-review-rating" data-score = "<%= @product.comments.average(:rating) %>">
+        </div>
+        <div class="average-review-rating">
+          <% $averge_rating = @product.comments.average(:rating) %>
         </div> <br>
       </div>  
     </div>
@@ -80,12 +81,15 @@
 </div>
 
 <script>
-    $('.average-review-rating').raty({
-      readOnly: true,
-      score: function() {
-      return $(this).attr('data-score');
-      },
-      path: '/assets/'
-    });
-  </script>
+   $(".average-review-rating").rateYo({
+       rating: '<%= $averge_rating %>',
+       spacing: "10px",
+       numStars: 5,
+       minValue: 0,
+       maxValue: 5,
+       normalFill: 'black',
+       ratedFill: 'orange',
+       readOnly: true
+   });
+</script>
 

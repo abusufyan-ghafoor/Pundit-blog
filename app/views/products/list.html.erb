@@ -2,6 +2,7 @@
   <br>
   <div class="row">
     <% @products.each do |product| %>
+    <% $avrg_rating = product.comments.average(:rating) %>
       <div class="col-lg-4">
         <div class="card" style="width: 18rem; border-style: solid; border-width: 1px; border-color: blue; color: black;">
           <div class="card-header" style="text-align: center;">
@@ -18,7 +19,7 @@
               <li class="list-group-item"><h5>Price: <strong><%= product.price %>.00 $</strong></h5></li>
               <li class="list-group-item"><h5>Category: <%= Category.find(product.category_id).name%></h5></li>
               <li class="list-group-item">
-                <div class="average-review-rating" data-score = "<%= product.comments.average(:rating) %>">
+                <div class="average-review-rating">
                 </div>
               </li>
             </ul>
@@ -35,11 +36,14 @@
   </div>
 </div>
 <script>
-  $('.average-review-rating').raty({
-    readOnly: true,
-    score: function() {
-    return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
+   $(".average-review-rating").rateYo({
+       rating: '<%= $averge_rating %>',
+       spacing: "10px",
+       numStars: 5,
+       minValue: 0,
+       maxValue: 5,
+       normalFill: 'black',
+       ratedFill: 'orange',
+       readOnly: true
+   });
 </script>

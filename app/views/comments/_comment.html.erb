@@ -6,17 +6,22 @@
     </p>
     <p>
       <h5>Rating:</h5>
-        <div class="review-rating" data-score = "<%= comment.rating %>">
+        <div id="review-rating">
+          <% $rati = comment.rating %>
         </div>
     </p>
   <% end %>
 </div>
 <script>
-  $('.review-rating').raty({
-    readOnly: true,
-    score: function() {
-    return $(this).attr('data-score');
-    },
-    path: '/assets/'
+  $("#review-rating").rateYo({
+    starWidth: "30px",
+    rating: <%= $rati || 3 %>,
+    spacing: "10px",
+    numStars: 5,
+    minValue: 0,
+    maxValue: 5,
+    normalFill: 'black',
+    ratedFill: 'orange',
+    readOnly: true
   });
 </script>
